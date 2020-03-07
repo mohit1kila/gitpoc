@@ -1,0 +1,11 @@
+<apex:page standardController="case" extensions="casectrl">
+  <apex:form >
+   <script>alert('{!objcasecomment.CommentBody }');</script>
+  <apex:pageBlock >
+ 
+  <apex:outputText value="{!strcasecomment}" escape="false"></apex:outputText>
+  <BR/><BR/><BR/><BR/>
+  <div style="width:500px">
+   <apex:outputText value="{!objcasecomment.CommentBody }" escape="false"></apex:outputText></div>
+  </apex:pageBlock></apex:form>
+</apex:page>

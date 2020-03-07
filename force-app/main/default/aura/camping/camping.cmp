@@ -1,0 +1,4 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <c:campingHeader ></c:campingHeader>
+    <c:campingList ></c:campingList>
+</aura:component>

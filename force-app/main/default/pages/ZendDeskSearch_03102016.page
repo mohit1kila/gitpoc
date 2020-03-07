@@ -1,0 +1,241 @@
+<apex:page controller="ZendDeskSearch" sidebar="false" id="ZendeskSearch">
+
+    <!-- scripts and styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <apex:includeScript value="/support/console/28.0/integration.js" />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+
+
+
+    <script>
+        function openintab(aa,title) {
+            sforce.console.openPrimaryTab(null, '/apex/myzendesk?code=' + aa,
+                true, title, openSuccess, 'Salesforce');
+        }
+
+        var openSuccess = function openSuccess(result) {
+            
+            //Report whether opening the new tab was successful
+            if (result.success == true) {
+                // alert('Primary tab successfully opened');
+            } else {
+                //alert('Primary tab cannot be opened');
+            }
+        };
+
+    </script>
+
+    <apex:form id="ZendeskSearchForm">
+        <div class="Container">
+            <div class="slinput">
+                <table valign="middle" border="0" style="border-collapse: collapse;width:100%">
+                    <tr>
+                        <td>
+                            <i class="fa fa-search left-icon" style="cursor:pointer;margin-top: 3px;" onclick="showSpinner();searchZendesk();"></i>
+                        </td>
+                        <td style=" border-bottom: 1px solid #717E88;border-right: 1px solid #e2e8ed;">
+                            <apex:inputText HTML-placeholder="Type search term and press Enter" onkeyup=" displayClear();"
+                                onkeypress="uniCharCode(event);" id="myText" value="{!SearchStiring}" style="width:86%;font-family: helvetica Neue;"></apex:inputText>
+                        </td>
+                        <td style="border-bottom: 1px solid #717E88;visibility:hidden" id="clearImage">
+                            <i class="fa fa-close right-icon"  style="color:#ccc;padding-left:20px;"
+                                onclick="clearText();"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <apex:actionFunction action="{!SearchZenDesk}" name="searchZendesk" rerender="searchResult"
+                oncomplete="callSeachmethodCompleted();">
+            </apex:actionFunction>
+
+            <div id="spinner" style="display:none;width:44%"> 
+                <p align="center" style='{font-family:"Arial", Helvetica, sans-serif; font-size:20px;}'>
+                    <apex:image value="/img/loading.gif" />&nbsp;Please wait</p>
+            </div>
+            <apex:outputPanel id="searchResult">
+                <apex:outputPanel rendered="{!isdiaplyResult}">
+                    <p style="color:#9faab3;font-family: helvetica Neue;font-size:13px;">
+                        ZenDesk Knowledge Base
+                    </p>
+                    <p>
+                        <h1 class="heading" style="color:#38454f;font-size:20px;">{!objArticleSearchWrapper.Count} Result for "{!SearchStiring}"</h1>
+                    </p>
+                    <br/>
+                    <hr style="background: #B7BEC4;height: 1px;border:0;" />
+                    <div style="overflow-y:scroll;height:200px;">
+                        <table style="width:97%">
+                            <apex:repeat value="{!objArticleSearchWrapper.results}" var="res">
+                                <tr valign="top">
+                                    <td style="width:7%">
+                                        <apex:outputPanel layout="block" rendered="{!res.vote_count>0}">
+                                            <table style="border-collapse: collapse;">
+                                                <tr valign="bottom">
+                                                    <td>
+                                                        <apex:image url="{!URLFOR($Resource.Zendesk,'/ZenDesk/images/TumbsUP.png')}" width="25" height="25" />
+                                                    </td>
+                                                    <td style="color:#C7E283">
+                                                        {!res.vote_count}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </apex:outputPanel>
+
+                                    </td>
+                                    <td>
+                                        <h1>
+                                            <a href="javascript:void(0);" class="blueheader" onclick="javascript:openintab('{!res.id}','{!res.title }');">{!res.title }</a>
+                                        </h1>
+                                        <p style="Color:#9faab3;font-size:12px;">
+                                            Modified
+                                            <apex:outputText value="{0, date, mm/dd/yyyy}">
+                                                <apex:param value="{!res.updated_at}" />
+                                            </apex:outputText>
+                                        </p>
+                                        <p style="font-size:14px;color:#38454f">
+                                            <apex:outputText value="{!res.body}" escape="false" style="color:#969492 !important"></apex:outputText>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                        </table>
+                    </div>
+                </apex:outputPanel>
+
+                <apex:outputPanel rendered="{!AND(!isdiaplyResult,SearchStiring != null)}">
+                    <br/>
+                    <h1 class="heading">No Result Found</h1>
+                </apex:outputPanel>
+
+            </apex:outputPanel>
+        </div>
+    </apex:form>
+    <style>
+    a:hover{
+        text-decoration: none; 
+    }
+    
+    body a:hover {
+        text-decoration: none; 
+    }
+    
+    /* padding left and right is for search and reset icons */
+        
+        .heading {
+            font-size: 16px;
+            font-family: helvetica Neue;
+        }
+        
+        .blueheader {
+            color: #1471A0;
+            font-size: 16px;
+            font-family: helvetica Neue;
+            text-decoration: none;
+        }
+        
+        .Container {
+            padding-left: 20px;
+            padding-right: 20px;
+            font-family: helvetica Neue;
+        }
+        
+        .slinput input {
+            padding: 10px;
+            width: inherit;
+            border: 1px solid #ccc;
+            padding-left: 25px;
+            padding-right: 25px;
+            color: black;
+            font-family: arial, sans-serif;
+            font-size: 16px;
+            border: none;
+        }
+        /* Remove IE10's “clear field” X button */
+        
+        .slinput input::-ms-clear {
+            display: none;
+        }
+        
+        .slinput input:focus {
+            border: 1px solid #4d90fe;
+        }
+        /* left side icon style (search icon) */
+        
+        .slinput .left-icon {
+            position: absolute;
+            left: 6px;
+            top: 8px;
+        }
+        
+        .slinput .fa {
+            color: #ccc;
+            font-size: 16px;
+        }
+        
+        .slinput .fa-close {
+            color: white;
+        }
+        /* right side icon style (search icon) */
+        
+        .slinput .right-icon {
+            /*position: absolute;
+            right: 10px;
+            top: 11px;*/
+            cursor: pointer;
+        }
+        
+        .slinput {
+            position: relative;
+            /* width: 97%;*/
+        }
+        
+        input::-webkit-input-placeholder {
+            font-size: 12px;
+            line-height: 2;
+        }
+    }
+
+    </style>
+    <script>
+        function uniCharCode(event) {
+
+            var char = event.which || event.keyCode;
+            if (char == 13) {
+                //alert(char);
+                searchZendesk();
+            }
+
+        }
+
+        function callSeachmethodCompleted() {
+            //document.getElementById('ZendeskSearch:ZendeskSearchForm:myText').disabled = false;
+            hideSpinner();
+        }
+
+        function displayClear() {
+            if (document.getElementById('ZendeskSearch:ZendeskSearchForm:myText').value.length > 0) {
+                document.getElementById('clearImage').style.visibility = 'visible';
+            } else {
+                document.getElementById('clearImage').style.visibility = 'hidden';
+            }
+        }
+
+        function clearText() {
+            document.getElementById('ZendeskSearch:ZendeskSearchForm:myText').value =
+                '';
+            displayClear();
+        }
+
+        function showSpinner() {
+            document.getElementById('spinner').style.display = '';
+        }
+
+        function hideSpinner() {
+            document.getElementById('spinner').style.display = 'none';
+        }
+
+    </script>
+
+
+
+</apex:page>

@@ -1,0 +1,19 @@
+<apex:page controller="VFC_ShowPotenial">
+    <apex:form >
+        <apex:pageBlock tabStyle="Account">
+            <apex:pageBlockSection title="Growth Potential" columns="4">
+              <apex:outputLabel style="width:40px;">Partner Name</apex:outputLabel>
+                <apex:inputText value="{!strname}" style="width:100px;align:left"/>
+                <apex:outputLabel style="width:40px">Investment</apex:outputLabel>
+                <apex:inputText value="{!IntanualInvestment}" style="width:100px;align:left"/>
+                <apex:outputLabel style="width:40px">Frequency</apex:outputLabel>
+                <apex:selectList size="3" multiselect="true"  value="{!strFrequency}"> 
+                <apex:selectOptions value="{!lstInvest_Tennure}" />  
+               </apex:selectList>
+                <apex:outputLabel style="width:40px">Years</apex:outputLabel>
+                <apex:inputText value="{!Int_Years}" style="width:100px;align:left"/>
+                
+                </apex:pageBlockSection>
+        </apex:pageBlock>
+   </apex:form>
+</apex:page>

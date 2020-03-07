@@ -1,0 +1,3 @@
+<apex:page extensions="VFP_MyLocation"  standardController="account">
+
+</apex:page>

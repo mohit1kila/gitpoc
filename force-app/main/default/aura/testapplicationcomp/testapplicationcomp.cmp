@@ -1,0 +1,20 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+<div class="container">
+<form class="slds-form--stacked">	
+<div class="slds-text-heading--medium">Getting Started</div><BR/><BR/>
+<div class="slds-form-element is-required">
+  <label class="slds-form-element__label medium" for="Email">User Name<abbr class="slds-required" title="required">*</abbr></label>
+  
+   <div class="slds-form-element__control slds-size--4-of-12">
+    <ui:inputText aura:id="UserName" class="slds-input"  placeholder="Email" required=""/>
+  </div>
+    </div><br/>
+<div class="slds-form-element is-required">
+  <label class="slds-form-element__label slds-align-left" for="Password">Password<abbr class="slds-required" title="required">*</abbr></label>
+  <div class="slds-form-element__control">
+          <input id="Password" class="slds-input slds-size--4-of-12" type="text" placeholder="Password" required=""/>
+    </div><br/><br/>
+    <ui:button class="slds-button slds-button--brand" label="Login >>" press="{!c.doaction}" />
+</div>
+    </form></div>
+</aura:component>

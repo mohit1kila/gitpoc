@@ -1,0 +1,9 @@
+<apex:page controller="MyPageController1" showHeader="false" sidebar="false" readOnly="true">
+    
+    <apex:repeat value="{!Accounts}" var="k">
+        <apex:outputText >{!K.name}</apex:outputText><Br/>
+    </apex:repeat>
+    
+    
+    
+</apex:page>

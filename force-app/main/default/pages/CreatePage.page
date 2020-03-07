@@ -1,0 +1,28 @@
+<apex:page doctype="html-5.0">
+<html>
+<head>
+  
+  <apex:stylesheet value="{!URLFOR($Resource.BOOTS, 'css/bootstrap.min.css')}" />
+  <apex:includeScript value="{!$Resource.sr001}"/>
+<apex:includeScript value="{!$Resource.sr002}"/>
+  <apex:includeScript value="{!URLFOR($Resource.BOOTS, '/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.BOOTS, '/bootstrap.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jQuery, 'js/jquery-1.6.2.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jQuery, 'js/jquery-ui-1.8.16.custom.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jqPlugin, '/jquery.blockUI.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.jQuery, 'css/ui-lightness/jquery-ui-1.8.16.custom.css')}"/>
+  <script src=""></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Button</h2>
+  <p>The .btn-danger class indicates a dangerous or potentially negative action:</p>                  
+  <button type="button" class="btn btn-danger">Danger</button>
+</div>
+    
+</body>
+</html>
+
+
+</apex:page>

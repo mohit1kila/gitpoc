@@ -1,0 +1,179 @@
+.cl {
+            clear: both;
+        }
+        
+        .main_div {
+            /*width:500px;*/
+            height: auto;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main_div p {
+            margin: 0;
+        }
+        
+        .main_div .search_sec {
+            width: auto;
+            height: 40px;
+            border-bottom: #717E88 1px solid;
+            position: relative;
+            padding: 0 30px;
+        }
+        
+        .main_div .search_sec .fa-search {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            color: #ccc;
+            font-size: 20px;
+            
+            /** added to remove inlne style**/
+            cursor:pointer;
+            margin-top: 3px;
+        }
+        
+        .main_div .search_sec .fa-close {
+            position: absolute;
+            top: 9px;
+            right: 6px;
+            color: #ccc;
+            font-size: 20px;
+            
+            /** added to remove inline CSS**/
+            color:#ccc;
+            padding-left:20px;
+        }
+        
+        .main_div .search_sec input {
+            width: 100%;
+            height: 98%;
+            border: none;
+            background: none;
+            outline: none;
+        }
+        
+        .main_div .search_sec input:-webkit-autofill {
+            background: none;
+        }
+        
+        .main_div .result_sec {
+            width: auto;
+            margin: 0 20px;
+        }
+        
+        .main_div .result_sec .result_records {
+            width: auto;
+            border-bottom: #B7BEC4 1px solid;
+            padding: 15px 0 10px 0;
+        }
+        
+        .main_div .result_sec .result_records p {
+            font-size: 13px;
+            color: #9faab3;
+        }
+        
+        .main_div .result_sec .result_records h1 {
+            font-size: 20px;
+            color: #38454f;
+            font-weight: normal;
+        }
+        
+        .main_div .result_sec .result_records_details {
+            width: 104%;
+            max-height: 231px;
+            overflow: auto;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table {
+            margin: 20px 0;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 {
+            width: 40px;
+            height: 50px;
+            float: left;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 .iconLike {
+            background: #b0d100;
+            color: #fff;
+            border-radius: 2px;
+            padding: 4px;
+            float: left;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 .iconLikeNeg {
+            background: #B0D102;
+            color: #fff;
+            border-radius: 2px;
+            padding: 4px;
+            float: left;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 .iconLike img {
+            float: left;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 .iconLike .no {
+            position: relative;
+            top: 3px;
+            margin-left: 2px;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td2 {
+            width: 390px;
+            float: left;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td2 h2 a {
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 16px;
+            color: #1471A0;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td2 .modified_txt {
+            font-size: 12px;
+            color: #9faab3;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td2 .txtStart p {
+            font-size: 14px;
+            color: #38454f;
+            margin-top: 5px;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 .iconDisLike {
+            background: #777777;
+            color: #fff;
+            border-radius: 2px;
+            padding: 4px;
+            float: left;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 .iconDisLike .no {
+            position: relative;
+            top: 3px;
+            margin-left: 2px;
+        }
+        
+        .main_div .result_sec .result_records_details .result_records_details_table_td1 .iconDisLike img {
+            float: left;
+        }
+        
+        body .console_widget_header_bg {
+            background: #000 !important;
+        }
+        
+        .spinnerClass{
+            margin-top:10px;
+        }
+        
+        .pleaseWaitClass{
+            font-size:20px;
+        }
+        
+        .heading{
+            margin:0 20px;
+        }

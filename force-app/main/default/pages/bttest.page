@@ -1,0 +1,145 @@
+<apex:page standardStylesheets="false" >
+   <apex:includeScript value="{!$Resource.jQuery}"/>
+  <apex:includeScript value="{!$Resource.btsJquery}"/>
+  <apex:includeScript value="{!$Resource.btsminjs}"/>
+  <apex:includeScript value="/support/console/34.0/integration.js"/>
+   <!--<apex:includeScript value="/soap/ajax/34.0/connection.js"/>--->
+   
+  <script>
+  var focusedTabId = "";
+   
+  window.onload = function() 
+  {
+    testOpenSubtab();
+  };
+  
+      
+  
+  
+      function testOpenSubtab()
+      {
+         console.log('getting primary tab id');
+         sforce.console.getFocusedPrimaryTabId(closeSubtab1);
+         sforce.console.getPrimaryTabIds(closeSubtab);
+          
+         //alert('focustab'+focusedTabId);
+       };
+       var j=0;
+       
+       var closeSubtab1 = function closeSubtab1(result)
+       {
+         focusedTabId = result.id;     
+       };
+       
+       
+       
+        var closeSubtab = function closeSubtab(result)
+        {
+            //Now that we have the primary tab ID, we can close it
+            alert(result.ids);
+           // alert(result.ids.length);
+            
+            for(var i=0; i < result.ids.length; i++)
+            {
+            var primaryTabId = result.ids[i];
+            if(primaryTabId != focusedTabId)
+            {
+               sforce.console.getSubtabIds(primaryTabId , showTabId);
+            }
+            }
+            
+            
+           
+                    
+  //sforce.console.closeTab(tabId);
+        };
+        var showTabId = function showTabId(result)
+        {
+           for(var i=0; i < result.ids.length; i++)
+            {
+                var subTabId = result.ids[i];
+                
+                sforce.console.getPageInfo(subTabId , function(result)
+                {
+                 if(result.pageInfo.indexOf('bttest') > -1)
+                 {
+                   alert('page Info1'  +result.pageInfo);
+                   sforce.console.closeTab(subTabId);
+                 }
+                
+                }
+                
+                
+                
+                );
+            }
+        
+        }
+        var showPageInfo = function showPageInfo(result)
+        {  // alert('page Info0'  +result.pageInfo);
+            if(result.pageInfo.indexOf('bttest'))
+            {
+              // alert('page Info1'  +result.pageInfo);
+               
+            }
+        
+        
+        }
+  
+  
+  </script>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"/>
+
+  
+  <!--<apex:stylesheet value="{!$Resource.BtsCSS}"/>-->
+
+  <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>-->
+  
+  
+  <!---BaDGE fUNCTIONALITY---->
+  
+   <div class="container"><a href="#">TOP 10  Champ</a>   <span class="badge">1</span>
+   <span class="badge"><img src="{!$Resource.MyData}" class="img-circle" alt="Cinque Terre" width="50" height="50"/> </span>
+   
+   <br/>
+  
+  
+  <!---BaDGE fUNCTIONALITY---->
+  
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Click for Detail</button>
+<a href="#" class="btn btn-primary">Primary</a>
+<a href="#" class="btn btn-success">Success</a>
+<a href="#" class="btn btn-info">Info</a>
+<a href="#" class="btn btn-warning">Warning</a>
+<a href="#" class="btn btn-danger">Danger</a>
+<a href="#" class="btn btn-link">Link</a>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Congrats</h4>
+        </div>
+        <div class="modal-body">
+        <div class="alert alert-success">
+    <strong>Success!</strong> You are real champ.
+  </div>
+          <p>Won 1 # Title</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+</apex:page>

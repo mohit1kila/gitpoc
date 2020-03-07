@@ -1,0 +1,13 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	
+    
+    <meta http-equiv="Content-Security-Policy" content="connect-src https://google.com; child-src 'none'; object-src 'none'"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+ 
+ 
+      <div class="g-recaptcha" data-sitekey="6Lf0p9oUAAAAADJ08_tM8VveaTBB72j9QZjfXZso"></div>
+      <br/>
+    <input type="submit" value="Submit"/>
+
+
+</aura:component>

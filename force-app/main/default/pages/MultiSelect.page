@@ -1,0 +1,107 @@
+<apex:page controller="aa" id="pg">
+<apex:includeScript value="{!URLFOR($Resource.DynaTree, 'jquery/jquery.js' )}" />
+<script>
+var strSelOption='';
+$(document).ready(function() 
+{ 
+    $('#btn-add').click(function(){    // Add Functionality
+    
+    $('#select-from :selected').each( function(i) {
+       $('#select-to').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");       
+
+          strSelOption= strSelOption+$(this).val()+';';
+          
+            $(this).remove();
+          
+        });
+
+       document.getElementById('hdn1').value=strSelOption;
+         
+    });
+    $('#btn-remove').click(function(){  //   Remove Functionality
+        $('#select-to :selected').each( function() {
+            $('#select-from').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+           
+            $(this).remove();
+            var temprmv='';
+           
+            if(strSelOption.indexOf($(this).val()) != -1)
+            {   temprmv=$(this).val()+";";
+                strSelOption=strSelOption.replace(temprmv,"");
+           
+               
+            
+            }
+        });
+    });
+    
+   $('#btn-up').bind('click', function() {   // Up Functionality
+        $('#select-to option:selected').each( function() {
+            var newPos = $('#select-to option').index(this) - 1;
+            if (newPos > -1) {
+                $('#select-to option').eq(newPos).before("<option value='"+$(this).val()+"' selected='selected'>"+$(this).text()+"</option>");
+                $(this).remove();
+            }
+        });
+    });
+    $('#btn-down').bind('click', function() {  //  Down Functionality
+        var countOptions = $('#select-to option').size();
+        $('#select-to option:selected').each( function() {
+            var newPos = $('#select-to option').index(this) + 1;
+            if (newPos < countOptions) {
+                $('#select-to option').eq(newPos).after("<option value='"+$(this).val()+"' selected='selected'>"+$(this).text()+"</option>");
+                $(this).remove();
+            }
+        });
+    });  
+
+
+
+});
+function test()
+{
+    document.getElementById('hdn1').value=strSelOption;
+
+    aab(document.getElementById('hdn1').value);
+}
+</script>
+<apex:form id="frm">
+
+<apex:actionFunction name="aab" action="{!redir}" reRender="pnl">
+ <apex:param name="p1" assignto="{!str}" value=""/>
+</apex:actionFunction>
+<input type="hidden" id="hdn1" value="{!str}"/>
+
+<apex:outputPanel id="pnl"></apex:outputPanel>
+<table >
+    <tr>
+        <td>
+            <select id="select-from" multiple="multiple" style="width: 100px">
+                <apex:repeat value="{!items}" var="k">
+                <option >{!k.value}</option>
+                </apex:repeat>
+            </select>
+        </td>
+        <td>
+            <b><a href="JavaScript:void(0);" id="btn-add">Add &raquo;</a></b><BR/>
+            <b><a href="JavaScript:void(0);" id="btn-remove">&laquo; Remove</a></b>
+        </td>
+        <td>
+            <select id="select-to" multiple="multiple" style="width: 100px">
+            <apex:repeat value="{!lst2}" var="k">
+            <option >{!k.value}</option>
+            </apex:repeat>
+            </select>
+        </td>
+        <td> 
+            <b><a href="JavaScript:void(0);" id="btn-up">Up</a></b><br/>
+            <b><a href="JavaScript:void(0);" id="btn-down">Down</a></b>
+        </td>
+    </tr>
+    <tr><apex:commandButton onclick="test();return false;" value="View Selected Value"  />
+    </tr>
+</table>
+
+
+</apex:form>
+</apex:page>

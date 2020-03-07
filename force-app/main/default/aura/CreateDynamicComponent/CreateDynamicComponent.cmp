@@ -1,0 +1,9 @@
+<aura:component extensible="true" >
+	
+           
+   <aura:method name="sampleMethod" action="{!c.doAction}" description="Sample method with parameters"> 
+              <!--Parameter in form of attribute-->    
+   </aura:method>
+    <aura:attribute name="super" type="string" default="test"/> 
+    {!v.body}
+</aura:component>

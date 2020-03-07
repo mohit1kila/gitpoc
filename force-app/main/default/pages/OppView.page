@@ -1,0 +1,9 @@
+<apex:page standardController="opportunity">
+  <apex:pageBlock >
+  <apex:outputField value="{!opportunity.name}"/>
+  <apex:outputField value="{!opportunity.stagename}"/>
+  <apex:outputField value="{!opportunity.amount}"/>
+  <apex:outputField value="{!opportunity.account.name}"/>
+  <apex:outputField value="{!opportunity.closedate}"/>
+  </apex:pageBlock>
+</apex:page>

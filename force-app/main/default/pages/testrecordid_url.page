@@ -1,0 +1,3 @@
+<apex:page controller="EmbedVisualforcePageController" showHeader="false">
+    <apex:outputText value="{!recordId}" />
+</apex:page>

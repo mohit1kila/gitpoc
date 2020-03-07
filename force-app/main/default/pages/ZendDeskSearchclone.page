@@ -1,0 +1,183 @@
+<apex:page controller="ZendDeskSearch" sidebar="false" id="ZendeskSearch" applyBodyTag="false">
+    <!-- scripts and styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <apex:includeScript value="/support/console/28.0/integration.js" />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.Zendesk,'/ZenDesk/ZenDeskStyle.css')}"
+    />
+    <script src="https://use.fontawesome.com/565cc55623.js"></script>
+
+
+    <script>
+        function openintab(aa, title) {
+            sforce.console.openPrimaryTab(null, '/apex/myzendesk?code=' + aa,
+                true, title, openSuccess, 'Salesforce');
+        }
+
+        function openSuccess(result) {
+
+            //Report whether opening the new tab was successful
+            if (result.success == true) {
+                sforce.console.setTabIcon("{!URLFOR($Resource.zendeskfavicon)}",
+                    result.id);
+            } else {
+                //alert('Primary tab cannot be opened');
+            }
+        };
+
+    </script>
+
+    <apex:form id="ZendeskSearchForm">
+        <!-- Start New Code -->
+        <div class="main_div">
+
+
+
+            <!-- Start Search Section -->
+            <div class="search_sec">
+                <!-- <span class="fa fa-search" onclick="showSpinner();searchZendesk();"></span> -->
+                <i class="fa fa-search" aria-hidden="true" onclick="showSpinner();searchZendesk();"></i>
+                <apex:inputText HTML-placeholder="Type search term and press Enter" onkeyup=" displayClear();"
+                    onkeypress="return uniCharCode(event);" id="myText" value="{!SearchStiring}"></apex:inputText>
+                <!-- <span id="clearImage" style="visibility:hidden"><span class="fa fa-close"  onclick="clearText();"></span></span> -->
+                <span id="clearImage" class="clearImgClass" ><i class="fa fa-times-circle" aria-hidden="true" onclick="clearText();"></i></span>
+
+            </div>
+            <!-- End Search Section -->
+
+            <apex:actionFunction action="{!SearchZenDesk}" name="searchZendesk" rerender="searchResult"
+                oncomplete="callSeachmethodCompleted();">
+            </apex:actionFunction>
+            <div id="spinner" class="spinnerClass" >
+                <p align="center" class="pleaseWaitClass">
+                    <apex:image value="/img/loading.gif" />&nbsp;Please wait
+                </p>
+            </div>
+
+            <!-- Start Result Section -->
+            <apex:outputPanel id="searchResult">
+
+                <apex:outputPanel rendered="{!isdiaplyResult}">
+                    <div class="result_sec">
+                        <div class="result_records">
+                            <p>ZenDesk Knowledge Base</p>
+                            <div class="cl"></div>
+                            <h1>{!objArticleSearchWrapper.Count} {!IF(objArticleSearchWrapper.Count > 1,'Results','Result')} for "{!SearchStiring}"</h1>
+                        </div>
+                        <div class="result_records_details">
+                            <!-- Start Result Table -->
+                            <apex:repeat value="{!objArticleSearchWrapper.results}" var="res">
+                                <div class="result_records_details_table">
+                                    <div class="result_records_details_table_td1">
+                                        <apex:outputPanel layout="block" rendered="{!res.vote_sum>0}" styleClass="iconLike">
+                                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                            <span
+                                                class="no">{!res.vote_count}</span>
+                                                <div class="cl"></div>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="block" rendered="{!res.vote_sum<0}" styleClass="iconDisLike">
+                                            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                            <span
+                                                class="no">{!res.vote_count}</span>
+                                                <div class="cl"></div>
+                                        </apex:outputPanel>
+                                    </div>
+                                    <div class="result_records_details_table_td2">
+                                        <h2><a href="javascript:void(0);" class="blueheader"
+                                                onclick="javascript:openintab('{!res.id}','{!res.title }');">{!res.title }</a></h2>
+                                        <p class="modified_txt">
+
+                                            <!--<apex:image url="{!URLFOR($Resource.Zendesk,'/ZenDesk/images/icon_Client.png')}"
+                                                rendered="{!IF(mapAccessPolicy[res.section_id].viewable_by = 'staff',true,false)}"
+                                            />-->
+                                            <i class="fa fa-user" aria-hidden="true" style="display:{!IF((res.objAccessPolicyWrapper !=null  && res.objAccessPolicyWrapper.access_policy.viewable_by == 'signed_in_users'),'','none')}"></i>
+                                            
+                                            <apex:image url="{!URLFOR($Resource.Zendesk,'/ZenDesk/images/icon_Lock_red.png')}"
+                                            rendered="{!IF((res.objAccessPolicyWrapper !=null  && res.objAccessPolicyWrapper.access_policy.viewable_by == 'staff'),true,false)}"
+                                            />
+                                            <apex:outputLabel value="Public - " rendered="{!IF((res.objAccessPolicyWrapper !=null  && res.objAccessPolicyWrapper.access_policy.viewable_by == 'everybody'),true,false)}"></apex:outputLabel>
+                                            <apex:outputLabel value=" Employee -" styleClass="EmployeeOnly" rendered="{!IF((res.objAccessPolicyWrapper !=null  && res.objAccessPolicyWrapper.access_policy.viewable_by == 'staff'),true,false)}"></apex:outputLabel>
+                                            <apex:outputLabel value=" Client Only - " rendered="{!IF((res.objAccessPolicyWrapper !=null  && res.objAccessPolicyWrapper.access_policy.viewable_by == 'signed_in_users'),true,false)}"></apex:outputLabel>
+                                            modified
+                                            <apex:outputText value="{0, date, mm/dd/yyyy}">
+                                                <apex:param value="{!res.updated_at}" />
+                                            </apex:outputText>
+                                        </p>
+                                        <p Class="txtStart">
+                                            {!res.shortdesc}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="cl"></div>
+                            </apex:repeat>
+                            <!-- End Result Table -->
+
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!AND(!isdiaplyResult,SearchStiring != null)}">
+                    <br/>
+                    <h1 class="heading" >No Result Found</h1>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <!-- End Result Section -->
+
+        </div>
+        <div class="cl"></div>
+        <!-- End New Code -->
+
+
+
+    </apex:form>
+
+    <script>
+        function uniCharCode(event) {
+
+            var char = event.which || event.keyCode;
+            if (char == 13) {
+              //  alert(char);
+                showSpinner();
+                searchZendesk();
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        function callSeachmethodCompleted() {
+            hideSpinner();
+        }
+
+        function displayClear() {
+            if (document.getElementById(
+                    'ZendeskSearch:ZendeskSearchForm:myText').value.length > 0) {
+                document.getElementById('clearImage').style.visibility =
+                    'visible';
+            } else {
+                document.getElementById('clearImage').style.visibility =
+                    'hidden';
+            }
+        }
+
+        function clearText() {
+            document.getElementById('ZendeskSearch:ZendeskSearchForm:myText').value =
+                '';
+            displayClear();
+        }
+
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+        }
+
+        function hideSpinner() {
+            document.getElementById('spinner').style.display = 'none';
+        }
+
+    </script>
+
+</apex:page>

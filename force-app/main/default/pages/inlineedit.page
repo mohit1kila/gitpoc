@@ -1,0 +1,189 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" 
+applyBodyTag="false" docType="html-5.0" controller="EditAndCloseController"> 
+    <html
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Salesforce</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <apex:stylesheet value="{!URLFOR($Resource.SLDS214, 'assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
+            <apex:includeScript value="https://code.jquery.com/jquery-2.2.4.min.js"  />
+<script type="text/javascript">
+    function methodOneInJavascript() {
+        // This is where you would call your actionFunction
+        // The name of the actionFunction is the function name used in javascript
+        editAction();
+        
+    }
+       function closemethod() {
+        // This is where you would call your actionFunction
+        // The name of the actionFunction is the function name used in javascript
+      
+        closeAction();
+    }
+</script>
+                <style>
+  inputtype=text {
+    width: 100%;
+}
+.Formcontrol
+{
+width: 400px;
+
+}
+  </style>
+            </head>
+            <body>
+                <apex:form >
+                    <!-- REQUIRED SLDS WRAPPER -->
+                    <div class="slds">
+                        <h3 class="slds-text-heading--large ">New Icoming Message</h3>
+                        <div class="slds-text-title slds-m-bottom--large">The quick brown fox jumps over the lazy dog.</div>
+                        <div class="slds-grid slds-wrap slds-m-bottom--large">
+                            <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-2 slds-medium-size--3-of-4">
+                                <div class="slds-truncate slds-text-heading--small slds-text-color--blue" title="Suggested Response">Suggested Response</div>
+                            </div>
+                            <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-2 slds-medium-size--1-of-4">
+                                <div class="slds-truncate slds-text-heading--small slds-text-color--blue slds-float--right" title="Confidence Level">Confidence Level</div>
+                            </div>
+                        </div>
+                        <BR/>
+                        
+                        <div class="slds-grid slds-has-divider--bottom">
+                            <div class="slds-grid">
+                                <div class="slds-col Formcontrol">
+                                    <div class="slds-float--left slds-size--2-of-3 Formcontrol" id="fm" >
+                                        <apex:input styleClass="slds-col Formcontrol" rendered="{!isvisible}" />
+                                        <apex:outputlabel >Amit test Data</apex:outputlabel>
+                                    </div>
+                                    <BR/>
+                                    <span class="slds-form-element__label slds-float--left">1/10</span>
+                                    <div class="slds-button-group slds-m-top--smal slds-float--right" role="group">
+                                        <button class="slds-button slds-button--neutral slds-float--right">Revert</button>
+                                        <button class="slds-button slds-button--neutral slds-float--right">Approve</button>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size--1-of-3">
+                                <apex:actionFunction name="editAction" action="{! edittest }" reRender="fm">
+                                </apex:actionFunction>
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field" onclick='methodOneInJavascript();'>
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#edit"/>
+                                        </svg>
+                                    </button>
+                                    <apex:actionFunction name="closeAction" action="{! closeeinput }" reRender="fm">
+                                    </apex:actionFunction>                                  
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field" onclick='closemethod();'>
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#close"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-size--1-of-6">
+                                    <div class="slds-float--absolute-center">90%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <BR/>
+                        
+                        <div class="slds-grid slds-wrap slds-has-divider--bottom">
+                            <div class="slds-grid">
+                                <div class="slds-col Formcontrol">
+                                    <div class="slds-float--left slds-size--2-of-3 Formcontrol" >
+                                        <apex:input styleClass="slds-col Formcontrol"/>
+                                    </div>
+                                    <BR/>
+                                    <span class="slds-form-element__label">2/10</span>
+                                    <div class="slds-button-group slds-m-top--smal slds-float--right" role="group">
+                                        <button class="slds-button slds-button--neutral slds-float--right">Revert</button>
+                                        <button class="slds-button slds-button--neutral slds-float--right">Approve</button>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size--2-of-12">
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field">
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#edit"/>
+                                        </svg>
+                                    </button>
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field">
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#close"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-size--2-of-12">
+                                    <div class="slds-float--absolute-center">90%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <BR/>
+                        
+                        <div class="slds-grid slds-wrap slds-has-divider--bottom">
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size--4-of-6">
+                                    <div class="slds-float--left" onclick="divClicked($(this));">Testing Is ON
+  </div>
+                                    <BR/>
+                                    <span class="slds-form-element__label">1/10</span>
+                                    <div class="slds-button-group slds-m-top--smal slds-float--right" role="group">
+                                        <button class="slds-button slds-button--neutral slds-float--right">Revert</button>
+                                        <button class="slds-button slds-button--neutral slds-float--right">Approve</button>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size--1-of-6">
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field">
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#edit"/>
+                                        </svg>
+                                    </button>
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field">
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#close"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-size--1-of-6">
+                                    <div class="slds-float--absolute-center">90%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <BR/>
+                        
+                        <div class="slds-grid slds-wrap slds-has-divider--bottom">
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size--4-of-6">
+                                    <div class="slds-float--left" onclick="divClicked($(this));">Good Article is good</div>
+                                    <BR/>
+                                    <span class="slds-form-element__label">2/10</span>
+                                    <div class="slds-button-group slds-m-top--smal slds-float--right" role="group">
+                                        <button class="slds-button slds-button--neutral slds-float--right">Revert</button>
+                                        <button class="slds-button slds-button--neutral slds-float--right">Approve</button>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size--1-of-6">
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field">
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#edit"/>
+                                        </svg>
+                                    </button>
+                                    <button class="slds-button  slds-button--icon" title="Edit this Field">
+                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--hint">
+                                            <use xlink:href="/resource/1479726550000/SLDS214/assets/icons/utility-sprite/svg/symbols.svg#close"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-size--1-of-6">
+                                    <div class="slds-float--absolute-center">90%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <BR/>
+                        
+                    </div>
+                    <!-- / REQUIRED SLDS WRAPPER -->
+                </apex:form>
+            </body>
+        </html>
+    </apex:page>

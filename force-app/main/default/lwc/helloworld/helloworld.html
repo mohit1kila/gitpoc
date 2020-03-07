@@ -1,0 +1,22 @@
+<template>
+  <lightning-card title='Helloworld' icon-name='custom-custom14'>
+      <div class="slds-m-around_medium">
+          <p>Hello, {greeting}!</p>
+          <!--<lightning-input label="Name" value={greeting} onchange={chageHandler}>
+
+          </lightning-input>-->
+          <template if:true={contacts.data}>
+          
+               <template for:each={contacts.data} for:item="contact">
+                <p key={contact.Id} >{contact.LastName}</p>
+                <lightning-record-form key={contact.lastname} record-id={contact.Id} object-api-name="Contact" layout-type="Compact" mode="view" density="auto"></lightning-record-form>
+                <lightning-button id={contact.Id} key={contact.Id} variant="brand" label="Brand action" title="Brand action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+               </template>
+            </template>
+            <template if:true={contacts.error}  >
+               <p>error</p>
+            </template>
+        
+      </div>
+  </lightning-card>  
+</template>

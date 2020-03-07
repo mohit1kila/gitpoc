@@ -1,0 +1,15 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:attribute name="selected" type="string"></aura:attribute>
+    <aura:registerEvent name="menuSelect"  type="ui:menuSelect"
+                    description="The event fired when a menu item is selected." />
+    
+    <ui:menu >
+    <ui:menuTriggerLink aura:id="trigger" label="Menu"/>
+        <ui:menuList class="actionMenu" aura:id="actionMenu" menuSelect="{!c.selected}">
+            <ui:actionMenuItem aura:id="item1" label="Cases" 
+                               click="{!c.navigateToMyComponent}"/>
+            <ui:actionMenuItem aura:id="item2" label="Invite Cases" 
+                               click="{!c.navigateToMyComponent}"/>
+        </ui:menuList>
+</ui:menu>
+</aura:component>

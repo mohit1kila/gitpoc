@@ -1,0 +1,10 @@
+<apex:page >
+<apex:includeScript value="/support/console/28.0/integration.js"/>
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.LightningCSS, '/assets/styles/salesforce-lightning-design-system.css')}" />
+    <apex:includeLightning />  
+    
+    <script>
+    parent.document.getElementById("ext-gen152").style.display="none";
+</script>
+</apex:page>

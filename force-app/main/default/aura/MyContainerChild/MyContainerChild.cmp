@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+	<aura:registerEvent name="compevent" type="c:ComponentEvent"/>
+    <aura:attribute name="variableInChild" type="string"></aura:attribute>
+     <aura:handler event="c:levent" action="{!c.handlechild}"/>
+    <lightning:button
+        label="Click here to fire an Component event"
+        onclick="{!c.fireChildEvent}" />
+    
+    
+    {!v.variableInChild}
+</aura:component>

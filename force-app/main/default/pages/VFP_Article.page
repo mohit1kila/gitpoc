@@ -1,0 +1,58 @@
+<apex:page sidebar="false" controller="KBController">   
+   <script type='text/javascript' src='/canvas/sdk/js/publisher.js'/>   
+   <style>
+      .sampleTitle { background-color: #99A3AC;color:#FFFFFF;font-size:1.1em;
+      font-weight: bold;padding:3px 6px 3px 6px; }  
+      .sampleHeader { }  
+      .sampleArticleList { min-width: 250px; padding: 8px 0 5px 0;}  
+      .sampleUl { padding: 0; margin: 0; list-style: none;}  
+      .sampleLi { display: block; position: relative; margin: 0;}  
+      .sampleRow { min-height: 16px; padding: 4px 10px;}  
+      .emailBtn { margin: 1px 1px 1px 3px; padding: 3px 8px; color: #333; 
+         border: 1px solid #b5b5b5; border-bottom-color: #7f7f7f; background: #e8e8e9; 
+         font-weight: bold; font-size: .9em; -moz-border-radius: 3px;
+         -webkit-border-radius: 3px; order-radius: 3px; }  
+      .emailBtn:active { background-position: right -60px; border-color: #585858; 
+         border-bottom-color: #939393; }       
+      .sampleArticle { padding-left: 4px; padding-bottom: 2px; font-weight: bold; 
+         font-size: 1em; color: #222; }  
+      .sampleLink { color: #015ba7; text-decoration: none; font-weight: bold; 
+         font-size: .9em; }    
+   </style>    
+   <script>
+      function emailArticle(content) {   
+         Sfdc.canvas.publisher.publish({name: 'publisher.selectAction', 
+         payload: { actionName: 'Case.Email'}}); 
+         Sfdc.canvas.publisher.publish({name: 'publisher.setActionInputValues', 
+         payload: {
+            actionName: 'Case.Email',
+            emailFields: { body: { value:content, format:'richtext', insert: true}}
+         }});
+     }
+   </script>
+   <div style="margin-left:-10px;margin-right:-10px;">
+      <div class="sampleTitle">Latest Articles</div>
+      <div class="sampleHeader" style=""></div>
+      <div class="sampleArticleList">
+         <apex:repeat value="{!articles}" var="article">
+            <ul class="sampleUl">
+               <li class="sampleLi">
+                  <div class="sampleRow">
+                  <div style="display:none;" id="content_{!article.id}">
+                     <apex:outputText value="{!article.Content__c}" escape="false"/>
+                  </div>
+                     <input type="button" title="Email" value="Email" class="emailBtn" 
+                        onclick="emailArticle(document.getElementById
+                           ('content_{!article.id}').innerHTML);"/>
+                           <span class="sampleArticle">
+                               <a href="/{!article.knowledgearticleid}"
+                                   title="{!article.title}" class="sampleLink">
+                                  {!article.title}</a>
+                           </span>
+                  </div>
+               </li>
+            </ul>
+         </apex:repeat>
+      </div>
+   </div>
+</apex:page>

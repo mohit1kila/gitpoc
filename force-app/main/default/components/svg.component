@@ -1,0 +1,7 @@
+<apex:component >
+    <apex:attribute name="styleClass" type="String" description="Class for svg tag" />
+    <apex:attribute name="path" type="String" description="Path for svg tag" />
+    <svg aria-hidden="true" class="slds-input__icon slds-icon-text-default">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.LightningCSS, '/assets/icons/utility-sprite/svg/symbols.svg#search')}" />
+    </svg>
+</apex:component>

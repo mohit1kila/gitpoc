@@ -1,0 +1,26 @@
+<apex:page >
+<!-- Lightning Resources-->
+    <apex:includeScript value="/lightning/lightning.out.js" />
+<apex:stylesheet value="{!URLFOR($Resource.LightningCSS, '/assets/styles/salesforce-lightning-design-system.css')}" />
+<apex:includeLightning />
+<div id="lightning" />
+
+ 
+
+
+    
+<apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:stylesheet value="/resource/SLDS/assets/styles/salesforce-lightning-design-system-vf.css"/>
+    <script>
+    
+        $Lightning.use("c:campingApp", function() {
+          $Lightning.createComponent("c:camping",
+          { },
+          "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+    </script>
+
+</apex:page>

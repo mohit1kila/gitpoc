@@ -1,0 +1,151 @@
+<apex:page >
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+        var app = angular.module('myApp', [])
+        app.controller('SearchEngine', function($scope) {
+            $scope.firstName = "John";
+            $scope.lastName = "Doe";
+            $scope.Address = [{
+                name: 'Jeni',
+                country: 'Norway',
+                state: 'demo',
+                pin: '456',
+                age: '34',
+                sex: 'M'
+            }, {
+                name: '2Hege',
+                country: 'India',
+                state: 'demo',
+                pin: '54',
+                age: '24',
+                sex: 'F'
+            }, {
+                name: '3name',
+                country: 'Aus',
+                state: 'demo3',
+                pin: '564',
+                age: '22',
+                sex: 'M'
+            }, {
+                name: '4name',
+                country: 'US',
+                state: 'demo4',
+                pin: '456',
+                age: '24',
+                sex: 'F'
+            }, {
+                name: '5name',
+                country: 'UAE',
+                state: 'demo5',
+                pin: '564',
+                age: '54',
+                sex: 'M'
+            }, {
+                name: '6name',
+                country: 'UK',
+                state: 'demo6',
+                pin: '456',
+                age: '45',
+                sex: 'F'
+            }, {
+                name: '7name',
+                country: 'PAK',
+                state: 'demo7',
+                pin: '456',
+                age: '35',
+                sex: 'M'
+            }, {
+                name: '8name',
+                country: 'Nepal',
+                state: 'demo8',
+                pin: '456',
+                age: '64',
+                sex: 'F'
+            }, {
+                name: '9name',
+                country: 'Germany',
+                state: 'demo9',
+                pin: '565',
+                age: '44',
+                sex: 'M'
+            }, {
+                name: '10name',
+                country: 'Sweden',
+                state: 'demo9',
+                pin: '456',
+                age: '64',
+                sex: 'M'
+            }, {
+                name: '11name',
+                country: 'Canada',
+                state: 'alaska',
+                pin: '456',
+                age: '34',
+                sex: 'F'
+            }, {
+                name: '12name',
+                country: 'Chili',
+                state: 'ny',
+                pin: '35',
+                age: '45',
+                sex: 'F'
+            }, {
+                name: '13name',
+                country: 'Cuba',
+                state: 'la',
+                pin: '45',
+                age: '45',
+                sex: 'F'
+            }];
+        });
+    </script>
+    <style>
+    </style>
+ 
+    <head>
+    </head>
+ 
+    <body ng-app="myApp">
+        <h1> ANGULARJS SEARCH </h1>
+        <div ng-controller="SearchEngine">
+            <div class="box">
+                <div class="container-1">
+                    <span class="icon"><i class="fa fa-search"></i></span>
+                    <input type="search" ng-model="key" id="search" placeholder="Search..." />
+                </div>
+            </div>
+            <div class="bs-example" data-example-id="contextual-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>State</th>
+                            <th>Sex</th>
+                            <th>Pin</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in Address | filter : key" class="info">
+                            <th scope="row">{{$index+1}}</th>
+                            <td>{{data.name}}</td>
+                            <td>{{data.country}}</td>
+                            <td>{{data.state}}</td>
+                            <td>{{data.sex}}</td>
+                            <td>{{data.pin}}</td>
+                            <td>{{data.age}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</apex:page>

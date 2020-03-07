@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" controller="showicon">
+	<aura:attribute name="status" type="String" default=""/>
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    
+    
+    <aura:if isTrue="{!v.status == 'DFL'}" >
+           
+    <img src="{!$Resource.BI_Completed}" alt="Completed"/>
+    </aura:if>
+    <aura:if isTrue="{!v.status == 'IndiaMart'}" >
+            <img src= "{!$Resource.BI_NotStarted}" alt="Not Started"/>
+    </aura:if>
+    
+    
+</aura:component>

@@ -1,0 +1,11 @@
+<apex:page standardController="contact">
+  <apex:pageMessages ></apex:pageMessages>
+  <apex:form >
+  <apex:inputField value="{!contact.firstname}"/>
+  <apex:inputField value="{!contact.lastname}"/>
+  <apex:inputField value="{!contact.email}"/>
+  
+  
+  <apex:commandButton value="save" action="{!save}"/>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,141 @@
+<apex:page controller="MyZendeskController" showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:includeScript value="/support/console/28.0/integration.js"/>
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.LightningCSS, '/assets/styles/salesforce-lightning-design-system.css')}" />
+    <script src="https://use.fontawesome.com/0a73dc258b.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
+    <apex:includeLightning />  
+     <apex:stylesheet value="{!$Resource.ZeneskUI}" />   
+     
+    
+    
+    <script>    
+    var votestatus = {};
+    var count = {!aart.vote_count};
+    var sum = {!aart.vote_sum};
+    function up()
+    {
+        var aaUP= document.getElementById('iup');
+        var aaDown= document.getElementById('idown');
+        aaUP.style.background='#78a300';
+        aaDown.style.background='#CFD4CF';
+        if(votestatus.up!=1){
+          sum=sum+2;
+          votestatus.up = 1;
+          votestatus.down = 0;
+          if(votestatus.voted!=1){
+          count++;
+          }
+        }
+        var text = sum +" of "+ count +" found this helpful.";
+        document.getElementById("myvote").innerHTML=text;
+        upvote();
+    }
+    function down()
+    {
+        var aa= document.getElementById('idown');
+        aa.style.background='#ff3232';
+        var aaDown = document.getElementById('iup');
+        aaDown.style.background='#CFD4CF';
+         if(votestatus.down!=1){
+          sum = sum-2;
+          votestatus.down = 1;
+          votestatus.up = 0;
+          if(votestatus.voted!=1){
+          count++;
+          }
+        }
+        var text = sum +" of "+ count +" found this helpful.";
+        document.getElementById("myvote").innerHTML=text;
+        downvote();
+    }
+   
+ 
+    window.onload = function(e) {
+    myvotes = {!myvote}.votes;                  
+    for (var j = 0; j < myvotes.length; j++){
+    console.log(myvotes[j].item_id);
+       if(myvotes[j].item_id=={!aart.id})
+       {       
+          votestatus.voted = 1;
+         if(myvotes[j].value==1)
+         {
+           document.getElementById('iup').style.background='#78a300';  
+           votestatus.up = 1;          
+         }   
+        else{
+          document.getElementById('idown').style.background='#ff3232';
+           votestatus.down = 1; 
+         }
+       break;
+      }            
+    }
+   };
+          
+
+    </script>
+    
+<div style="margin:20px;">
+  <div class="row">
+  <div class="slds-col">     
+    <div class="articlename">
+    <div class="articlename-left"><img src="{!$Resource.zendkicon}" width="30" height="30"/>&nbsp;</div>
+    <div class="articlename-right">{!aart .Title}</div>
+    </div>
+  </div>
+  </div>    
+ 
+  
+  <div class="row breadcrumb">
+    {!IF(OR(categoryDescriptionJason.name== "",categoryDescriptionJason.name== null),categoryDescriptionJason.name,categoryDescriptionJason.name+"  >")}&nbsp;&nbsp;{!sectionDescriptionJason.name}&nbsp;&nbsp;>&nbsp;&nbsp;{!aart .Title}       
+  </div>   
+
+
+  <!--{!strTitle}<br/>-->
+
+  
+ <div class="access"> 
+    <apex:outputText rendered="{!if(teststring.viewable_by=='everybody',false,true)}">
+      <i class="fa fa-user" aria-hidden="true"></i>Clients Only:&nbsp;<a href="{!aart.html_url}">{!aart.html_url}</a><br/> 
+      <p>Viewer must be logged into the inDinero product</p>   
+    </apex:outputText>
+  <apex:outputText rendered="{!if(teststring.viewable_by=='everybody',true,false)}">
+    Public:&nbsp;<a href="{!aart.html_url}">{!aart.html_url}</a>
+  </apex:outputText>    
+  </div>
+ 
+ <div style="font-size:12px;color:#808080;">modified:&nbsp;
+     <apex:outputText value="{0,date,MM'/'dd'/'yy}">
+        <apex:param value="{!updated_date}" /> 
+     </apex:outputText>
+ </div>
+ 
+  
+  
+ 
+  
+     <div class="description">
+      <apex:outputText value="{!aart.Body}" escape="false"/>
+       <div class="article-votes">
+         <apex:form >
+         <apex:actionFunction action="{!doSearchup}" name="upvote" rerender="divvote">             
+         </apex:actionFunction>
+         <apex:actionFunction action="{!doSearchdown}" name="downvote" rerender="divvote">                 
+         </apex:actionFunction>  
+         
+                   <div class="vote" id="divvote">Was this article helpful?&nbsp;&nbsp;
+                        <i  id="iup" class="fa fa-thumbs-up circle3 article-votes2" style="cursor:pointer" aria-hidden="true" onclick="up()">                        
+                        </i>
+                        <i id="idown" class="fa fa-thumbs-up circle3 article-votes2 transformvote" style="cursor:pointer" aria-hidden="true" onclick="down()">
+                         </i>                        
+                    </div>
+                    <div  class="vote-result" id="myvote">{!aart.vote_sum} of {!aart.vote_count} found this helpful.</div>             
+                
+            </apex:form>
+         </div>         
+      </div>  
+  
+</div>
+
+    
+</apex:page>

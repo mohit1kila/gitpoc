@@ -1,0 +1,67 @@
+<apex:page controller="AccountRemoter" standardStylesheets="false" sidebar="false" showHeader="false" >
+     
+    <!-- Lightning Resources-->
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:stylesheet value="/resource/LightningCSS/assets/styles/salesforce-lightning-design-system-vf.css"/>
+     
+    <script type="text/javascript">
+        function getRemoteAccount() {
+            var accountName = document.getElementById('acctSearch').value;
+            document.getElementById("lightningComponent").innerHTML = " ";
+            document.getElementById("responseErrors").style.display = "none";
+             
+            //Remote Function
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.AccountRemoter.getAccount}',
+                accountName, 
+                function(result, event){
+                    if (event.status) {
+                         
+                        if(result.length > 0){
+                            //Adding Lightning Component Here
+                            $Lightning.use("c:JSRemote", function() {
+                                $Lightning.createComponent("c:JSRemoteComp",
+                                      { "accounts" : result },
+                                      "lightningComponent",
+                                      function(cmp) {
+                                        // any further setup goes here
+                                });
+                            });
+                             
+                        }else{
+                            document.getElementById("responseErrors").style.display = "block";
+                            document.getElementById("responseErrors").innerHTML = "No Records Found";
+                        }
+                         
+                    } else if (event.type === 'exception') {
+                        document.getElementById("responseErrors").style.display = "block";
+                        document.getElementById("responseErrors").innerHTML = 
+                            event.message + "
+\n
+ 
+ 
+ 
+ 
+<pre>" + event.where + "</pre>
+ 
+";
+                    } else {
+                        document.getElementById("responseErrors").style.display = "block";
+                        document.getElementById("responseErrors").innerHTML = event.message;
+                    }
+                },
+                {escape: true}
+            );
+        }
+    </script>
+<div class="slds">
+        <input id="acctSearch" class="slds-input" type="text" placeholder="Search Account"/>
+        <button class="slds-button slds-button--neutral" onclick="getRemoteAccount()">Get Account</button>
+        <!-- Error Message -->
+<div id="responseErrors" style="display:none;" class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture" role="alert">
+        </div>
+</div>
+ 
+    <!-- Lightning Component -->
+<div id="lightningComponent"/>
+</apex:page>

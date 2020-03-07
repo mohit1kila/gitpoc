@@ -1,0 +1,18 @@
+<apex:page controller="VFC_autodialer">
+<apex:form >
+  <apex:pageBlock tabStyle="Account" Title="Auto Dialer Opt Out Request">
+  <div><p><b><font style="color:red">Retail Online Banking text alerts will not be deactivated. If you wish to
+opt-out of text banking alerts, please text “STOP” to xxx-xxx-xxxx.  In 
+addition, this will not stop certain text messages related to fraud or other 
+messages designed to safeguard your account or personal information. 
+This will not stop direct dial calls to this number.</font></b></p></div><br/><br/>
+  <apex:pageBlockSection title="Customer Information">
+  <apex:inputField value="{!objCS.AccountId}"/>
+  </apex:pageBlockSection>
+  <apex:pageblockButtons >
+  <apex:commandButton value="Save"/>
+  <apex:commandButton value="Save and Next"/>
+  <apex:commandButton value="Cancel"/>
+  </apex:pageblockButtons>
+  </apex:pageBlock></apex:form>
+</apex:page>

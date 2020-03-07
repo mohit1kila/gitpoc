@@ -1,0 +1,11 @@
+<apex:page >
+<apex:form >
+Title : Phone:  {!$User.Title}
+Name : {!$User.LastName} {!$User.FirstName} 
+Email:  {!$User.Email}
+FirstName:  {!$User.FirstName}
+Phone:  {!$User.Phone}
+<apex:InputText />
+<apex:commandButton value="Send"/>
+</apex:form>
+</apex:page>

@@ -1,0 +1,16 @@
+<aura:component controller="icoder.accountctrl">
+ <aura:attribute name="account" type="account" default="{'sobjectType': 'account'}"/>
+<aura:attribute name="accounts" type="account[]"/>
+<aura:handler name="init" value="{!this}"  action="{!c.getaccounts}" />
+   <form>
+		<aura:iteration items="{!v.accounts}" var="p">
+          <tr>
+               <td>
+                {!p.name}
+               </td> 
+           </tr>
+        </aura:iteration>
+   </form>
+
+
+</aura:component>

@@ -1,0 +1,4 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:attribute name="PageName" type="string"></aura:attribute>
+    My Page : {!v.PageName}
+</aura:component>

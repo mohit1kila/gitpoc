@@ -1,0 +1,43 @@
+<apex:page showHeader="false" controller="picklst" >
+<script> var previousOnload = window.onload; window.onload = function() 
+{
+ if (previousOnload) { 
+ previousOnload();
+ }
+
+Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.picklst.gtPicklist}',
+             
+            function(result, event){
+                if (event.status) 
+                {
+                   
+                    // Get DOM IDs for HTML and Visualforce elements like this
+                    //document.getElementById("{!$Component.j_id0:frm:strPicklist}").innerHTML = result;
+                    alert(document.getElementById("{!$Component.j_id0:frm:strPicklist}"));
+                   // var x = document.getElementById("mySelect");
+                    
+                    document.getElementById("{!$Component.j_id0:frm:strPicklist}").add('aa');
+                    
+                } else if (event.type === 'exception') {
+                    alert('error');
+                } else {
+                   alert('mserror');
+                }
+            }, 
+            {escape: true}
+        ); 
+}
+ </script>
+<html lang="en-US">
+
+<apex:includeScript value="{!$Resource.STS_Angular}"/>
+<body>
+<apex:form id="frm">
+        <apex:selectList id="strPicklist" value="{!strPicklist}" multiselect="true" >
+            <apex:selectOptions value="{!lstSelectoption}"   />
+        </apex:selectList>
+</apex:form>
+
+</body>
+</html></apex:page>

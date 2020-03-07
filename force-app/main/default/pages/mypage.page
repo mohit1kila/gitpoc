@@ -1,0 +1,39 @@
+<apex:page controller="MyPageController" showHeader="false" sidebar="false">
+<apex:includeScript value="/support/console/28.0/integration.js"/>
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.LightningCSS, '/assets/styles/salesforce-lightning-design-system.css')}" />
+    <apex:includeLightning />    
+<section> 
+  <div class="row">
+  <div class="slds-col">
+     <div></div>
+    <div class="slds-box slds-box--small  slds-text-align--left"><img src="{!$Resource.Circle}" width="40px" height="40px"/> &nbsp;<b>{!aart .Title}</b></div>
+  </div>
+  </div>    
+  <div class="row">
+    <p><font color="green">{!categoryDescriptionJason.name}>{!sectionDescriptionJason.name}>{!aart .Title}</font></p>       
+  </div>   
+
+
+  <!--{!strTitle}<br/>-->
+  
+ <div class="row"><div class="slds-box slds-box--small  slds-text-align--left">
+  <img src="{!if(teststring.viewable_by=='everybody',$Resource.publicicon,$Resource.privateuser)}"/> &nbsp; &nbsp;
+  <a href="{!aart.url}">{!aart.url}</a>
+  
+  </div>
+ </div>
+ <div class="row"><div class="slds-box slds-box--small  slds-text-align--left">
+ Last modified:{!aart.updated_at}</div>
+ </div>
+   <div class="row">
+  <div class="slds-col">
+    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--left"><apex:outputText value="{!aart.Body}" escape="false"/></div>
+  </div> 
+  </div>
+</section>
+
+  
+       
+    
+</apex:page>

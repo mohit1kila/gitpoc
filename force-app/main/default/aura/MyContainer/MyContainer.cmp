@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+	<aura:handler name="compevent" event="c:ComponentEvent" action="{!c.handleComponentEvent}"/>
+    <aura:attribute name="component_event_message" type="string" default="xyz"></aura:attribute>
+    
+   Parent of Child Component {!v.component_event_message}<br/>
+    Here Buton start from child component<br/>
+    <c:MyContainerChild ></c:MyContainerChild>
+</aura:component>

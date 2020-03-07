@@ -1,0 +1,115 @@
+<apex:page showHeader="false" controller="SearchZendeskArticleController" tabStyle="Trail__c">
+    <style>
+    .console_widget_header_bg {
+        background: '#78a300'
+    }
+    </style>
+    <apex:includeScript value="/support/console/28.0/integration.js" />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:stylesheet value="{!URLFOR($Resource.LightningCSS, '/assets/styles/salesforce-lightning-design-system.css')}" />
+
+    
+        <apex:stylesheet value="{!URLFOR($Resource.BOOTS, '/bootstrap-3.3.5-dist/css/bootstrap.min.css')}" />
+    
+
+    <apex:includeLightning />
+    <script>
+    function myFunction()
+    {
+        var aa = document.getElementById('lookup-01').value;
+        searchdata(aa);
+    }
+
+    function resettext()
+    {
+        document.getElementById('lookup-01').value = '';
+        resetlistdata(document.getElementById('lookup-01').value);
+    }
+
+    function showConsoleUrl(result)
+    {
+        console.log(result.consoleUrl);
+        sforce.console.openConsoleUrl(null, result.consoleUrl, true, ['', '', 'www.google.com', '']);
+    }
+    var url = '';
+
+    function testOpenPrimaryTab()
+    {
+        //Open a new primary tab with the salesforce.com home page in it
+        sforce.console.openPrimaryTab(null, 'https://www.zendesk.com', true, 'salesforce', openSuccess1, 'salesforceTab');
+    }
+    var openSuccess1 = function openSuccess1(result)
+    {
+        //Report whether opening the new tab was successful
+        if (result.success == true)
+        {
+            alert('Primary tab successfully opened');
+        }
+        else
+        {
+            alert('Primary tab cannot be opened');
+        }
+    };
+
+    function openintab(aa)
+    {
+        // alert(aa);
+        //console.log(aa);
+        // sforce.console.openPrimaryTab(null, 'https://cloudhooper.zendesk.com/hc/en-us/articles/210668929-AC-Is-working', true,
+        //   'salesforce', openSuccess, 'salesforceTab');
+        // var win = window.open(aa, '_blank');
+        //  win.focus();
+        sforce.console.openPrimaryTab(null, '/apex/mypage?code=' + aa, true, 'salesforce', openSuccess, 'salesforceTab');
+    }
+    var openSuccess = function openSuccess(result)
+    {
+        //Report whether opening the new tab was successful
+        if (result.success == true)
+        {
+            // alert('Primary tab successfully opened');
+        }
+        else
+        {
+            //alert('Primary tab cannot be opened');
+        }
+    };
+
+    function openPrimaryTab()
+    {
+        sforce.console.openPrimaryTab(undefined, 'www.zendesk.com', true, 'example');
+    }
+    </script>
+    <apex:form >
+        <apex:actionFunction name="resetlistdata" action="{!resetdata}" rerender="myStatus" status="myStatus">
+            <apex:param id="aname1" assignTo="{!strSearhData}" name="interviewDate" value="" /> </apex:actionFunction>
+        <apex:actionFunction name="searchdata" action="{!calldata}" rerender="myStatus" status="myStatus">
+            <apex:param id="aname" assignTo="{!strSearhData}" name="interviewDate" value="" /> </apex:actionFunction>
+        <section >
+        
+        <table>
+        <tr>
+        <td><input id="lookup-01" class="slds-input" type="text" aria-autocomplete="list" role="combobox" aria-expanded="true" aria-activedescendant="" value="{!searchString}" placeholder="Search the Zend Desk Knowledge Base" /></td>
+        <td><button type="button" class="slds-button slds-button--brand" onclick="javascript:myFunction();return false;">Search</button> </td>
+        <td><button type="button" class="slds-button slds-button--brand" onclick="javascript:resettext();return false;">Reset</button> </td>
+        </tr>
+        </table>
+        
+            
+        </section>
+        <apex:outputPanel id="myStatus">
+            <apex:repeat var="k" Value="{!lstData}">
+                <div class="slds-tile">
+                    <h3 class="slds-truncate"><a href="javascript:void(0);" onclick="javascript:openintab('{!k.articleId}');">{!k.strTitle }</a></h3>
+                    <div class="slds-tile__detail slds-text-body--small">
+                        <p>{!k.name}</p>
+                        <ul class="slds-list--horizontal slds-has-dividers--right slds-tile__meta">
+                            <li class="slds-item">
+                                <apex:outputtext value="{!k.body}" escape="false" /> </li>
+                            <!--    <li class="slds-item">1 day ago</li> -->
+                        </ul>
+                    </div>
+                </div>
+            </apex:repeat>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,8 @@
+<aura:component extends="c:CreateDynamicComponent" >
+   aaaa
+   aaaaaaaaaaaaa
+    
+	 <div>
+        <a onclick="{!c.navigateToObjectList}">Call Parent method</a>
+    </div>
+</aura:component>

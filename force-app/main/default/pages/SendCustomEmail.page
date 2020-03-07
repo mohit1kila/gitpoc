@@ -1,0 +1,7 @@
+<apex:page standardController="Case" extensions="MycaseCTRl">
+<apex:form >
+ <apex:PageBlock >
+ <apex:commandButton action="{!URLFOR($Action.Activity.SendEmail,objSC.id,[p2_lkid=objSC.contactId,rtype=LPAD('3',3,'00'),p3_lkid=objSC.id,p5='ras@gmail.com',retURL=$CurrentPage.url])}" value="Send an Email"/>
+ </apex:PageBlock>
+ </apex:form>
+</apex:page>

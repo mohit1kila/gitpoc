@@ -1,0 +1,46 @@
+<aura:component >
+    <!-- Attribute -->
+    <aura:attribute name="accounts" type="Account[]"/>
+    <!-- REQUIRED SLDS WRAPPER -->
+    <div class="slds">
+        <!-- Page Header -->
+        <div class="slds-page-header">
+            <div class="slds-grid">
+                <div class="slds-col slds-has-flexi-truncate">
+                    <h1 class="slds-text-heading--medium slds-truncate" title="Account Information">Account Information</h1>
+                </div>
+            </div>
+        </div>
+        <!-- TABLE - BADGE COMPONENT -->
+        <table class="slds-table slds-table--bordered">
+            <thead>
+                <tr class="slds-text-heading--label">
+                    <th scope="col">
+                        <span class="slds-truncate">Name</span>
+                    </th>
+                    <th scope="col">
+                        <span class="slds-truncate">Phone</span>
+                    </th>
+                    <th scope="col">
+                        <span class="slds-truncate">Active</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.accounts}" var="account">
+                    <tr class="slds-hint-parent">
+                        <td data-label="activity">
+                            <span class="slds-truncate">{!account.Name}</span>
+                        </td>
+                        <td data-label="confidence">
+                            <span class="slds-truncate">{!account.Phone}</span>
+                        </td>
+                        <td data-label="confidence">
+                            <span class="slds-truncate">{!account.Active__c}</span>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table><!-- TABLE - BADGE COMPONENT -->
+    </div><!-- REQUIRED SLDS WRAPPER -->
+</aura:component>
